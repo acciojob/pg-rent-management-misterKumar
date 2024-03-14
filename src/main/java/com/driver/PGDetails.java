@@ -12,6 +12,10 @@ public class PGDetails {
 
 	    public PGDetails(int id, String name, double rent, int rooms) {
 	    	// your code goes here
+			this.id=id;
+			this.name=name;
+			this.rent=rent;
+			this.rooms=rooms;
 	    }
 
 	    // Getters
@@ -38,23 +42,32 @@ public class PGDetails {
 	    // Setters
 	    public void setId(int id) {
 	    	// your code goes here
+			this.id=id;
 	    }
 
 	    public void setName(String name) {
 	    	// your code goes here
+			this.name=name;
 	    }
 
 	    public void setRent(double rent) {
 	    	// your code goes here
+			this.rent=rent;
 	    }
 
 	    public void setRooms(int rooms) {
 	    	// your code goes here
+			this.rooms=rooms;
 	    }
 
 	    @Override
 	    public String toString() {
 	    	// your code goes here
-	    	return null;
+			return "PGDetails{" +
+					"id=" + id +
+					", name='" + name + '\'' +
+					", rent=" + rent +
+					", rooms=" + rooms +
+					'}';
 	    }
 }

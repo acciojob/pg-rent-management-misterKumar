@@ -24,25 +24,43 @@ public class PGRentController {
     @PostMapping("/register")
     public ResponseEntity<String> registerPG(@RequestBody PGDetailsRequest pgDetailsRequest) {
     	// your code goes here
-        return null;
+        int id = pgIDCounter++;
+        PGDetails pgDetails = new PGDetails(id, pgDetailsRequest.getName(), pgDetailsRequest.getRent(), pgDetailsRequest.getRooms());
+        pgStore.put(id, pgDetails);
+        return ResponseEntity.ok("Registered PG with ID: " + id);
     }
 
     @PutMapping("/updateRent/{id}")
     public ResponseEntity<String> updateRent(@PathVariable int id, @RequestBody RentUpdateRequest rentUpdateRequest) {
     	// your code goes here
-        return null;
+        if (!pgStore.containsKey(id)) {
+            throw new PGNotFoundException("PG with ID " + id + " not found");
+        }
+        PGDetails pgDetails = pgStore.get(id);
+        pgDetails.setRent(rentUpdateRequest.getRent());
+        pgStore.put(id, pgDetails);
+        return ResponseEntity.ok("Updated PG with ID: " + id);
     }
 
     @GetMapping("/details/{id}")
     public ResponseEntity<PGDetails> fetchDetails(@PathVariable int id) {
     	// your code goes here
-    	return null;
+        if (!pgStore.containsKey(id)) {
+            throw new PGNotFoundException("PG with ID " + id + " not found");
+        }
+        PGDetails pgDetails = pgStore.get(id);
+        return ResponseEntity.ok(pgDetails);
     }
 
     @GetMapping("/annualIncome/{id}")
     public ResponseEntity<Double> annualIncome(@PathVariable int id) {
     	// your code goes here
-    	return null;
+        if (!pgStore.containsKey(id)) {
+            throw new PGNotFoundException("PG with ID " + id + " not found");
+        }
+        PGDetails pgDetails = pgStore.get(id);
+        double annualIncome = pgDetails.getRent() * 12;
+        return ResponseEntity.ok(annualIncome);
     }
 
     @ExceptionHandler(PGNotFoundException.class)

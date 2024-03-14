@@ -9,6 +9,7 @@ public class RentUpdateRequest {
 
 	    public RentUpdateRequest(double rent) {
 	    	// your code goes here
+			this.rent=rent;
 	    }
 
 	    // Getter
@@ -20,11 +21,14 @@ public class RentUpdateRequest {
 	    // Setter
 	    public void setRent(double rent) {
 	    	// your code goes here
+			this.rent=rent;
 	    }
 
 	    @Override
 	    public String toString() {
 	    	// your code goes here
-	    	return null;
+			return "RentUpdateRequest{" +
+					"rent=" + rent +
+					'}';
 	    }
 }
