@@ -27,7 +27,7 @@ public class PGRentController {
         int id = pgIDCounter++;
         PGDetails pgDetails = new PGDetails(id, pgDetailsRequest.getName(), pgDetailsRequest.getRent(), pgDetailsRequest.getRooms());
         pgStore.put(id, pgDetails);
-        return ResponseEntity.ok("Registered PG with ID: " + id);
+        return new ResponseEntity<>("Registered PG with ID: " + id,HttpStatus.CREATED);
     }
 
     @PutMapping("/updateRent/{id}")
@@ -46,7 +46,7 @@ public class PGRentController {
     public ResponseEntity<PGDetails> fetchDetails(@PathVariable int id) {
     	// your code goes here
         if (!pgStore.containsKey(id)) {
-            throw new PGNotFoundException("PG with ID " + id + " not found");
+            throw new PGNotFoundException("PG with ID " + id + " not found.");
         }
         PGDetails pgDetails = pgStore.get(id);
         return ResponseEntity.ok(pgDetails);
